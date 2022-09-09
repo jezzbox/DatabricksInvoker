@@ -1,0 +1,15 @@
+/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/bin/Debug/net6.0/DatabricksInvoker
+/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/bin/Debug/net6.0/DatabricksInvoker.deps.json
+/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/bin/Debug/net6.0/DatabricksInvoker.runtimeconfig.json
+/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/bin/Debug/net6.0/DatabricksInvoker.dll
+/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/bin/Debug/net6.0/DatabricksInvoker.pdb
+/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/obj/Debug/net6.0/DatabricksInvoker.csproj.AssemblyReference.cache
+/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/obj/Debug/net6.0/DatabricksInvoker.GeneratedMSBuildEditorConfig.editorconfig
+/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/obj/Debug/net6.0/DatabricksInvoker.AssemblyInfoInputs.cache
+/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/obj/Debug/net6.0/DatabricksInvoker.AssemblyInfo.cs
+/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/obj/Debug/net6.0/DatabricksInvoker.csproj.CoreCompileInputs.cache
+/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/obj/Debug/net6.0/DatabricksInvoker.dll
+/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/obj/Debug/net6.0/refint/DatabricksInvoker.dll
+/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/obj/Debug/net6.0/DatabricksInvoker.pdb
+/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/obj/Debug/net6.0/DatabricksInvoker.genruntimeconfig.cache
+/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/obj/Debug/net6.0/ref/DatabricksInvoker.dll
