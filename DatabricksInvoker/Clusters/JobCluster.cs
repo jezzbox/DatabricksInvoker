@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace DatabricksInvoker;
+namespace DatabricksInvoker.Clusters;
 
-public class JobClustersSetting
+public class JobCluster
 {
     [JsonPropertyName("job_cluster_key")]
     public string JobClusterKey { get; set; }

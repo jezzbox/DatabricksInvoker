@@ -1,8 +1,9 @@
 using System.Text.Json.Serialization;
+using DatabricksInvoker.Clusters;
 
-namespace DatabricksInvoker;
+namespace DatabricksInvoker.Tasks;
 
-public class JobTask
+public class Task
 {
     [JsonPropertyName("task_key")]
     public string TaskKey { get; set; }
@@ -22,12 +23,5 @@ public class JobTask
     public List<Dictionary<string, string>> Libraries { get; set; }
     [JsonPropertyName("notebook_task")]
     public NotebookTask NotebookTask { get; set; }
-    [JsonPropertyName("timeout_seconds")]
-    public int TimeoutSeconds { get; set; }
-    [JsonPropertyName("max_retries")]
-    public int MaxRetries { get; set; }
-    [JsonPropertyName("min_retry_interval_millis")]
-    public int MinRetryIntervalMillis { get; set; }
-    [JsonPropertyName("retry_on_timeout")]
-    public bool RetryOnTimeout { get; set; }
+
 }

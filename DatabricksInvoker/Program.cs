@@ -5,26 +5,39 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Web;
+
 namespace DatabricksInvoker
 {
     class Program
     {
         private static readonly HttpClient client = new();
         
+        
+        
         private static async Task Main(string[] args)
         {
+            string bearerToken = Environment.GetEnvironmentVariable("BEARER_TOKEN");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", bearerToken);
+            
             long jobId = 379702724573372;
             int clientId = 16;
             string date = "20220705";
             Uri baseUri = new Uri(args[0] + "/api/2.1/");
-            string bearerToken = Environment.GetEnvironmentVariable("BEARER_TOKEN");
-            var runJobResponse = await RunJob(379702724573372, clientId, date, baseUri, bearerToken);
-            Console.WriteLine(runJobResponse.RunId);
+            var queryString = await GetJobRun(1234, true, baseUri);
+            Console.WriteLine(queryString);
+            // var runJobResponse = await RunJob(379702724573372, clientId, date, baseUri, bearerToken);
+            // Console.WriteLine(runJobResponse.RunId);
             // foreach (var job in jobs)
             //     Console.WriteLine(job.JobId);
         }
 
-        private static async Task<List<Job>> GetJobs(Uri baseUri, string bearerToken)
+        private static async Task<List<Jobs.Job>> GetJobs(Uri baseUri, string bearerToken)
         {
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
@@ -36,12 +49,12 @@ namespace DatabricksInvoker
             string endpoint = "jobs/list";
             Uri requestUri = new Uri(baseUri, endpoint);
             var streamTask = client.GetStreamAsync(requestUri);
-            var response = await JsonSerializer.DeserializeAsync<ListJobsResponse>(await streamTask);
+            var response = await JsonSerializer.DeserializeAsync<Jobs.List.Response>(await streamTask);
             var jobs = response.Jobs;
             return jobs;
         }
 
-        private static async Task<RunJobResponse> RunJob(long jobId, int clientId, string date, Uri baseUri, string bearerToken)
+        private static async Task<Runs.RunNow.Response> RunJob(long jobId, int clientId, string date, Uri baseUri, string bearerToken)
         {
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
@@ -50,7 +63,7 @@ namespace DatabricksInvoker
             client.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", bearerToken);
 
-            var requestBody = new RunJobRequestBody(jobId, clientId, date);
+            var requestBody = new Runs.RunNow.requestBody(jobId, clientId, date);
             Console.WriteLine(requestBody.JobId);
             var json = JsonSerializer.Serialize(requestBody);
             Console.WriteLine(json);
@@ -62,8 +75,26 @@ namespace DatabricksInvoker
             Console.WriteLine(requestUri);
             var response = await client.PostAsync(requestUri, jsonBody);
             var streamTask = response.Content.ReadAsStreamAsync();
-            var runJobResponse = await JsonSerializer.DeserializeAsync<RunJobResponse>(await streamTask);
+            var runJobResponse = await JsonSerializer.DeserializeAsync<Runs.RunNow.Response>(await streamTask);
             return runJobResponse;
+
+        }
+
+        private static async Task<Runs.Run> GetJobRun(long runId, bool includeHistory, Uri baseUri)
+        {
+            var queryParameters = HttpUtility.ParseQueryString("");
+            queryParameters["run_id"] = runId.ToString();
+            queryParameters["include_history"] = includeHistory.ToString().ToLower();
+            
+            const string endpoint = "jobs/runs/get";
+            Uri requestUri = new Uri(baseUri, endpoint);
+            UriBuilder requestUriBuilder = new UriBuilder(requestUri);
+            requestUriBuilder.Query = queryParameters.ToString();
+            
+            var streamTask = client.GetStreamAsync(requestUriBuilder.ToString());
+            var response = await JsonSerializer.DeserializeAsync<Runs.Run>(await streamTask);
+            return response;
+
 
         }
     }

@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
+using DatabricksInvoker.Clusters;
+using DatabricksInvoker.Tasks;
 
-namespace DatabricksInvoker;
+namespace DatabricksInvoker.Jobs;
 
 public class JobSettings
 {
@@ -10,9 +12,9 @@ public class JobSettings
     [JsonPropertyName("tags")]
     public Dictionary<string, string> Tags { get; set; }
     [JsonPropertyName("tasks")]
-    public List<JobTask> Tasks { get; set;}
+    public List<JobTaskSettings> Tasks { get; set;}
     [JsonPropertyName("job_clusters")]
-    public JobClustersSetting JobClusters { get; set;}
+    public List<JobCluster> JobClusters { get; set;}
     [JsonPropertyName("email_notifications")]
     public EmailNotificationsSetting EmailNotifications { get; set; }
     [JsonPropertyName("timeout_seconds")]

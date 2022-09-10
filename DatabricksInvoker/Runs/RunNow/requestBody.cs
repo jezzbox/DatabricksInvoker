@@ -1,11 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace DatabricksInvoker;
+namespace DatabricksInvoker.Runs.RunNow;
 
-public class RunJobRequestBody
+public class requestBody
 {
-    public RunJobRequestBody(long jobId, int clientId, string date)
+    public requestBody(long jobId, int clientId, string date)
     {
         JobId = jobId;
         NotebookParams = new Dictionary<string, string>()

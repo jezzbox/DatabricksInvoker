@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace DatabricksInvoker;
+namespace DatabricksInvoker.Jobs.List;
 
-public class ListJobsResponse
+public class Response
 {
     [JsonPropertyName("jobs")]
     public List<Job> Jobs { get; set; }

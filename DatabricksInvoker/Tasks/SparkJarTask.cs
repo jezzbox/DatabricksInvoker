@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace DatabricksInvoker;
+namespace DatabricksInvoker.Tasks;
 
 public class SparkJarTask
 {
