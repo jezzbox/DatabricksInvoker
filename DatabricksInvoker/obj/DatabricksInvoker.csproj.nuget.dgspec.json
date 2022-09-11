@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/DatabricksInvoker.csproj": {}
+    "C:\\Users\\jerem\\Source\\Repos\\DatabricksInvoker\\DatabricksInvoker\\DatabricksInvoker.csproj": {}
   },
   "projects": {
-    "/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/DatabricksInvoker.csproj": {
+    "C:\\Users\\jerem\\Source\\Repos\\DatabricksInvoker\\DatabricksInvoker\\DatabricksInvoker.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/DatabricksInvoker.csproj",
+        "projectUniqueName": "C:\\Users\\jerem\\Source\\Repos\\DatabricksInvoker\\DatabricksInvoker\\DatabricksInvoker.csproj",
         "projectName": "DatabricksInvoker",
-        "projectPath": "/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/DatabricksInvoker.csproj",
-        "packagesPath": "/home/jezzbox/.nuget/packages/",
-        "outputPath": "/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/obj/",
+        "projectPath": "C:\\Users\\jerem\\Source\\Repos\\DatabricksInvoker\\DatabricksInvoker\\DatabricksInvoker.csproj",
+        "packagesPath": "C:\\Users\\jerem\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jerem\\Source\\Repos\\DatabricksInvoker\\DatabricksInvoker\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/jezzbox/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\jerem\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -41,6 +43,14 @@
             "CommandLineParser": {
               "target": "Package",
               "version": "[2.9.1, )"
+            },
+            "Microsoft.AspNetCore.Http.Extensions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
             }
           },
           "imports": [
@@ -49,8 +59,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -59,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.400/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.303\\RuntimeIdentifierGraph.json"
         }
       }
     }

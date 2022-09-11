@@ -8,7 +8,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Web;
 using CommandLine;
-using DatabricksInvoker.Jobs.Runs.RunNow;
+using DatabricksInvoker.Jobs.Runs;
 
 namespace DatabricksInvoker
 {
@@ -16,43 +16,96 @@ namespace DatabricksInvoker
     {
         private static readonly HttpClient client = new();
         
-        private static async Task Main(string[] args)
+        static async Task Main(string[] args)
         {
-            // string bearerToken = Environment.GetEnvironmentVariable("BEARER_TOKEN");
-            // client.DefaultRequestHeaders.Accept.Clear();
-            // client.DefaultRequestHeaders.Accept.Add(
-            //     new MediaTypeWithQualityHeaderValue("application/json"));
-            // client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");
-            // client.DefaultRequestHeaders.Authorization =
-            //     new AuthenticationHeaderValue("Bearer", bearerToken);
+            string bearerToken = Environment.GetEnvironmentVariable("BEARER_TOKEN");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", bearerToken);
 
-            Parser.Default.ParseArguments<RunOptions>(args)
-                .WithParsed<RunOptions>(o =>
-                {
-                    Resource runNowResource = new Resource(o);
-                    
-                    string bearerToken = Environment.GetEnvironmentVariable("BEARER_TOKEN");
-                    client.DefaultRequestHeaders.Accept.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(
-                        new MediaTypeWithQualityHeaderValue("application/json"));
-                    client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");
-                    client.DefaultRequestHeaders.Authorization =
-                        new AuthenticationHeaderValue("Bearer", bearerToken);
-                    runNowResource.PrintPayload();
-                    runNowResource.RunNow(client);
-                    runNowResource.PrintResponse();
-                });
-            
-            // DatabricksMessage databricksMessage = new DatabricksMessage(379702724573372, 16, "20220705", args[0]);
-          
-            // var queryString = await GetJobRun(384, true, runRequest);
-            // Console.WriteLine(queryString);
-            // var runJobResponse = await RunJob(379702724573372, clientId, date, baseUri, bearerToken);
-            // Console.WriteLine(runJobResponse.RunId);
-            // foreach (var job in jobs)
-            //     Console.WriteLine(job.JobId);
+
+            await Parser.Default.ParseArguments<RunOptions>(args).WithParsedAsync(
+                RunJob);
         }
 
+        static async Task RunJob(RunOptions options)
+        {
+            Uri baseUri = new(options.Url);
+            RunNowResource resource = new(options);
+            var response = await resource.SendRequest(client, baseUri);
+            Console.WriteLine(response.RunId);
+
+            var queryParams = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("run_id", response.RunId.ToString()),
+                new KeyValuePair<string, string>("include_history", "false")
+            };
+
+            Run runMetaData = new();
+            GetResource runResource = new(queryParams);
+            bool isRunning = true;
+
+
+            while (isRunning)
+            {
+                runMetaData = await runResource.SendRequest(client, baseUri);
+                var runState = runMetaData.State;
+
+                Console.WriteLine(Utils.ToJSONString(runState));
+
+                switch (runState.LifeCycleState)
+                {
+                    case "PENDING":
+                    case "RUNNING":
+                        {
+                            await Task.Delay(60 * 1000);
+                            break;
+                        }
+                    case "TERMINATING":
+                        {
+                            await Task.Delay(60 * 1000);
+                            break;
+                        }
+                    case "TERMINATED":
+                        {
+                            isRunning = false;
+                            break;
+                        }
+                    case "SKIPPED":
+                        {
+                            isRunning = false;
+                            break;
+                        }
+                    case "INTERNAL_ERROR":
+                        {
+                            throw new Exception("Job failed.");
+                        }
+                }
+
+            }
+            Console.WriteLine(Utils.ToJSONString(runMetaData));
+
+
+
+
+
+        }
+
+        //private static async Task RunNow(RunOptions options)
+        //{
+        //    Console.WriteLine("do we reach here?");
+
+        //    var response = await resource.SendRequest(client, baseUri);
+        //    Console.WriteLine(response);
+        //}
+
+        static void HandleParseError(IEnumerable<Error> errs)
+        {
+            throw new ArgumentException("incorrect arguments.");
+        }
         private static async Task<List<Jobs.Job>> GetJobs(Uri baseUri, string bearerToken)
         {
             string endpoint = "list";

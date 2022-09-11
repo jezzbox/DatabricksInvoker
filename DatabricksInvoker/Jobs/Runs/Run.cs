@@ -2,11 +2,11 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DatabricksInvoker.Clusters;
-using DatabricksInvoker.Jobs.Runs.RunNow;
+using DatabricksInvoker.Jobs.Runs;
 
 namespace DatabricksInvoker.Jobs.Runs;
 
-public class Run
+public class Run : JSONSchema
 {
     [JsonPropertyName("job_id")]
     public long JobId {get; set;}
@@ -18,14 +18,17 @@ public class Run
     public long NumberInJob {get; set;}
     
     [JsonPropertyName("creator_user_name")]
-    public string CreatorUserName { get; set; }
+    public string? CreatorUserName { get; set; }
     
     [JsonPropertyName("original_attempt_run_id")]
     public long OriginalAttemptRunId { get; set; }
     
     [JsonPropertyName("state")]
     public RunState State { get; set; }
-    
+
+    [JsonPropertyName("schedule")]
+    public Dictionary<string, string> Schedule { get; set; }
+
     [JsonPropertyName("tasks")]
     public List<Tasks.Task> Tasks { get; set;}
     
@@ -43,6 +46,7 @@ public class Run
     
     [JsonPropertyName("overriding_parameters")]
     public RunParameters OverridingParameters { get; set; }
+
     [JsonPropertyName("start_time")]
     public long StartTime { get; set; }
     

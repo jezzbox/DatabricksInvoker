@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace DatabricksInvoker.Jobs.Runs.RunNow;
+namespace DatabricksInvoker.Jobs.Runs;
 
-public class Response
+public class RunNowResponse : JSONSchema
 {
     [JsonPropertyName("run_id")]
     public long RunId { get; set; }

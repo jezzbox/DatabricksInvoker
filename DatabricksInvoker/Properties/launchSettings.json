@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "DatabricksInvoker": {
+      "commandName": "Project",
+      "commandLineArgs": "run -u https://adb-1487230804890814.14.azuredatabricks.net -j 379702724573372 -n \"{\\\"cheese\\\": \\\"pie\\\"}\" -t notebook",
+      "environmentVariables": {
+        "BEARER_TOKEN": "dapide80958ecf857f3bf5377c48f5ef9f80-2"
+      }
+    }
+  }
+}
