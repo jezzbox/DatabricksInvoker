@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace DatabricksInvoker.Runs.RunNow;
+namespace DatabricksInvoker.Jobs.Runs.RunNow;
 
 public class Response
 {

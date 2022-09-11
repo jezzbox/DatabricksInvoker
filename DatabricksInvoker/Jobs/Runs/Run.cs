@@ -1,7 +1,10 @@
+using System.Text;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using DatabricksInvoker.Clusters;
+using DatabricksInvoker.Jobs.Runs.RunNow;
 
-namespace DatabricksInvoker.Runs;
+namespace DatabricksInvoker.Jobs.Runs;
 
 public class Run
 {
@@ -72,6 +75,5 @@ public class Run
 
     [JsonPropertyName("repair_history")]
     public List<RepairHistoryItem> RepairHistory { get; set; }
-    
 }
 

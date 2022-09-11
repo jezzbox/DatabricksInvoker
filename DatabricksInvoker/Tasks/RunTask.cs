@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-using DatabricksInvoker.Runs;
+using DatabricksInvoker.Jobs.Runs;
 
 namespace DatabricksInvoker.Tasks;
 

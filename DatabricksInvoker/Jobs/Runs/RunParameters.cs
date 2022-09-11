@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace DatabricksInvoker.Runs;
+namespace DatabricksInvoker.Jobs.Runs;
 
 public class RunParameters
 {

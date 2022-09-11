@@ -13,3 +13,5 @@
 /home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/obj/Debug/net6.0/DatabricksInvoker.pdb
 /home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/obj/Debug/net6.0/DatabricksInvoker.genruntimeconfig.cache
 /home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/obj/Debug/net6.0/ref/DatabricksInvoker.dll
+/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/bin/Debug/net6.0/CommandLine.dll
+/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/obj/Debug/net6.0/DatabricksInvoker.csproj.CopyComplete

@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "oojPYSuX42cYCHTBR26aTmnVtNavaKN6Tcy+5dmSI1Nk6TSrCbvQdCr5Ms2ag5a/mjilLfI3ASUD2nKhIac5bA==",
+  "dgSpecHash": "MBE9vfuDFwjVzqwUD8QAdmN9Vsa7rVUgj94IoEVtXyxdYwZXFUWqI+A1M4l+5GTEv3jrqmHpEOAmXggWhVm7Pg==",
   "success": true,
   "projectFilePath": "/home/jezzbox/RiderProjects/DatabricksInvoker/DatabricksInvoker/DatabricksInvoker.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/home/jezzbox/.nuget/packages/commandlineparser/2.9.1/commandlineparser.2.9.1.nupkg.sha512"
+  ],
   "logs": []
 }
