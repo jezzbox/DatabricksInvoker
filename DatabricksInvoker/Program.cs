@@ -8,7 +8,8 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Web;
 using CommandLine;
-using DatabricksInvoker.Jobs.Runs;
+using DatabricksInvoker.CmdLineOptions;
+using DatabricksInvoker.Operators;
 
 namespace DatabricksInvoker
 {
@@ -33,8 +34,8 @@ namespace DatabricksInvoker
 
         static async Task RunJob(RunOptions options)
         {
-            Uri baseUri = new(options.Url);
-            RunNowResource resource = new(options);
+            JobsOperator jobsOperator = new(options);
+
             var response = await resource.SendRequest(client, baseUri);
             Console.WriteLine(response.RunId);
 

@@ -6,6 +6,8 @@ namespace DatabricksInvoker.Jobs.Runs;
 
 public class RunNowPayload : JSONSchema
 {
+
+
     public RunNowPayload(long jobId, string? requestParams, string? paramType)
     {
         JobId = jobId;
