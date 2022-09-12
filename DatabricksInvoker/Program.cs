@@ -34,9 +34,9 @@ namespace DatabricksInvoker
 
         static async Task RunJob(RunOptions options)
         {
-            JobsOperator jobsOperator = new(options);
+            RunJobOperator runJobOperator = new(options);
 
-            var response = await resource.SendRequest(client, baseUri);
+            var response = await runJobOperator.SendRequest(client);
             Console.WriteLine(response.RunId);
 
             var queryParams = new List<KeyValuePair<string, string>>
@@ -45,7 +45,7 @@ namespace DatabricksInvoker
                 new KeyValuePair<string, string>("include_history", "false")
             };
 
-            Run runMetaData = new();
+            JobRun runMetaData = new();
             GetResource runResource = new(queryParams);
             bool isRunning = true;
 

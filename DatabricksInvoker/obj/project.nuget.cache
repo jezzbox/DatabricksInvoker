@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DD9vaPCWRXxHmFuZ59TzZ4s/c9syr1LysvqujLLP7ITEpWCt5V1jHnAxkioTzj5WGYZybi+GOmmnMUuH07xLTA==",
+  "dgSpecHash": "BXimn0a0CZkZP6v0y/siy59ttNgLA75DY0AOXgoQFAo/KVPBYuknA6mgU7CyTX0J1tMC81EscsGTPnjf05a01g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jerem\\Source\\Repos\\DatabricksInvoker\\DatabricksInvoker\\DatabricksInvoker.csproj",
+  "projectFilePath": "C:\\Users\\jerem\\source\\repos\\DatabricksInvoker\\DatabricksInvoker\\DatabricksInvoker.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jerem\\.nuget\\packages\\commandlineparser\\2.9.1\\commandlineparser.2.9.1.nupkg.sha512",
     "C:\\Users\\jerem\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",

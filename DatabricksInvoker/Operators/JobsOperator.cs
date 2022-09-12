@@ -7,61 +7,85 @@ using DatabricksInvoker.Models;
 using DatabricksInvoker;
 using System.Text.Json;
 using DatabricksInvoker.CmdLineOptions;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace DatabricksInvoker.Operators
 {
     public abstract class JobsOperator
     {
-        public JobsOperator(RunOptions runOptions)
-        {
-            BaseUri = new(runOptions.Url);
-        }
 
         public Uri BaseUri { get; }
 
-        public abstract Options Options { get; }
+        public abstract string Path { get; }
+
+        public virtual Options? Options { get; }
+
+        public virtual List<KeyValuePair<string, string>>? QueryParams { get; }
+
+        public string GetQueryString()
+        {
+            if (QueryParams != null)
+            {
+                var query = new QueryBuilder(QueryParams);
+                return query.ToQueryString().ToString();
+            }
+            else
+            {
+                return "";
+            }
+
+        }
+        public Uri GetEndpoint(Uri baseUri)
+        {
+            string queryString = GetQueryString();
+
+            var endpoint = new Uri(baseUri, Path);
+            var endpointWithParams = new Uri(endpoint, queryString);
+            Console.WriteLine(endpointWithParams);
+            return endpointWithParams;
+        }
 
         //public static async Task<List<Jobs.Job>> GetJob(BaseUri, )
         //{
 
         //}
 
-        public async Task<RunNowResponse> RunJob(HttpClient client)
-        {
-            const string Path = "/api/2.1/jobs/run-now";
-            RunNowPayload payload;
+        //public async Task<RunNowResponse> RunJob(HttpClient client)
+        //{
+        //    const string Path = "/api/2.1/jobs/run-now";
+        //    RunNowPayload payload;
 
-            if (RunOptions.Payload != null)
-            {
-                payload = JsonSerializer.Deserialize<RunNowPayload>(RunOptions.Payload)!;
-            }
+        //    if (RunOptions.Payload != null)
+        //    {
+        //        payload = JsonSerializer.Deserialize<RunNowPayload>(RunOptions.Payload)!;
+        //    }
 
-            else if (RunOptions.JobId != null)
-            {
-                long jobId = RunOptions.JobId.Value;
-                payload = new(jobId, RunOptions.Params, RunOptions.ParamType);
-            }
-            else
-            {
-                throw new ArgumentException("Must have either job-id or payload parameter.");
-            }
+        //    else if (RunOptions.JobId != null)
+        //    {
+        //        long jobId = RunOptions.JobId.Value;
+        //        payload = new(jobId, RunOptions.Params, RunOptions.ParamType);
+        //    }
+        //    else
+        //    {
+        //        throw new ArgumentException("Must have either job-id or payload parameter.");
+        //    }
 
-            string jsonString = Utils.ToJSONString(payload);
+        //    string jsonString = Utils.ToJSONString(payload);
 
-            var stringContent = new StringContent(
-                jsonString, Encoding.UTF8, "application/json"
-                );
+        //    var stringContent = new StringContent(
+        //        jsonString, Encoding.UTF8, "application/json"
+        //        );
 
-            var endpoint = new Uri(BaseUri, Path);
+        //    var endpoint = new Uri(BaseUri, Path);
 
-            HttpResponseMessage response = await client.PostAsync(endpoint, stringContent);
-            response.EnsureSuccessStatusCode();
+        //    HttpResponseMessage response = await client.PostAsync(endpoint, stringContent);
+        //    response.EnsureSuccessStatusCode();
 
-            var streamTask = response.Content.ReadAsStreamAsync();
+        //    var streamTask = response.Content.ReadAsStreamAsync();
 
-            var runNowResponse = await JsonSerializer.DeserializeAsync<RunNowResponse>(await streamTask);
-            return runNowResponse!;
-        }
+        //    var runNowResponse = await JsonSerializer.DeserializeAsync<RunNowResponse>(await streamTask);
+        //    return runNowResponse!;
+        //}
 
         //public static async Task<List<Jobs.Job>> GetRunStatus(BaseUri, string bearerToken)
         //{

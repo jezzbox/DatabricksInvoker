@@ -11,7 +11,7 @@ namespace DatabricksInvoker.Operators
 {
     internal class RunJobOperator : JobsOperator, IOperator<HttpClient, RunNowResponse>
     {
-        RunJobOperator(RunOptions options)
+        public RunJobOperator(RunOptions options)
         {
             if (options.Payload != null)
             {
@@ -29,31 +29,15 @@ namespace DatabricksInvoker.Operators
             }
         }
 
+        public override string Path { get; } = "/api/2.1/jobs/run-now";
+
         public RunNowPayload Payload { get; }
 
-        public RunNowResponse Response { get; }
+        public RunNowResponse? Response { get; }
 
         public async Task<RunNowResponse> SendRequest(HttpClient client)
         {
-            const string Path = "/api/2.1/jobs/run-now";
-            RunNowPayload payload;
-
-            if (RunOptions.Payload != null)
-            {
-                payload = JsonSerializer.Deserialize<RunNowPayload>(RunOptions.Payload)!;
-            }
-
-            else if (RunOptions.JobId != null)
-            {
-                long jobId = RunOptions.JobId.Value;
-                payload = new(jobId, RunOptions.Params, RunOptions.ParamType);
-            }
-            else
-            {
-                throw new ArgumentException("Must have either job-id or payload parameter.");
-            }
-
-            string jsonString = Utils.ToJSONString(payload);
+            string jsonString = Utils.ToJSONString(Payload);
 
             var stringContent = new StringContent(
                 jsonString, Encoding.UTF8, "application/json"
