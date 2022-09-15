@@ -11,7 +11,7 @@
         "projectName": "DatabricksInvoker",
         "projectPath": "C:\\Users\\jerem\\source\\repos\\DatabricksInvoker\\DatabricksInvoker\\DatabricksInvoker.csproj",
         "packagesPath": "C:\\Users\\jerem\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jerem\\Source\\Repos\\DatabricksInvoker\\DatabricksInvoker\\obj\\",
+        "outputPath": "C:\\Users\\jerem\\source\\repos\\DatabricksInvoker\\DatabricksInvoker\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jerem\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -68,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.303\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }

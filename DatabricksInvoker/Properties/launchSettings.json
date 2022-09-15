@@ -2,8 +2,9 @@
   "profiles": {
     "DatabricksInvoker": {
       "commandName": "Project",
-      "commandLineArgs": "run -u https://adb-1487230804890814.14.azuredatabricks.net -j 379702724573372 -n \"{\\\"cheese\\\": \\\"pie\\\"}\" -t notebook",
+      "commandLineArgs": "run-job -i 379702724573372 --notebook-params \"{\\\"cheese\\\": \\\"pie\\\",\\\"client_id\\\": \\\"44\\\",\\\"date\\\": \\\"20231231\\\" }\"",
       "environmentVariables": {
+        "URL": "https://adb-1487230804890814.14.azuredatabricks.net",
         "BEARER_TOKEN": "dapide80958ecf857f3bf5377c48f5ef9f80-2"
       }
     }
